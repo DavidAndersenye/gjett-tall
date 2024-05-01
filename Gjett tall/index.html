@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gjett tallet</title>
+    <style>
+        .win {
+            background-color: green;
+            color: orange;
+            font-size: 20px;
+        }
+
+        .loss {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gjett tallet mellom 0 og 100</h1>
+    <input type="text" id="gjettInput">
+    <button onclick="sjekkGjett()">Gjett</button>
+    <p id="resultat"></p>
+    
+    <img id="gifBilde" src="congrats-congrats-gif.gif" alt="Vinner-GIF" style="display: none">
+
+    <script>
+        var rettTall = Math.floor(Math.random() * 101);
+
+        function sjekkGjett() {
+            var brukerGjett = parseInt(document.getElementById("gjettInput").value);
+            var resultatElement = document.getElementById("resultat");
+            var gifBilde = document.getElementById("gifBilde");
+
+            if (brukerGjett < rettTall) {
+                resultatElement.textContent = "Du gjettet på " + brukerGjett + ". Dette er for lavt. Prøv igjen!";
+                resultatElement.classList.remove("win");
+                resultatElement.classList.add("loss");
+            } else if (brukerGjett > rettTall) {
+                resultatElement.textContent = "Du gjettet på " + brukerGjett + ". Dette er for høyt. Prøv igjen!";
+                resultatElement.classList.remove("win");
+                resultatElement.classList.add("loss");
+            } else {
+                resultatElement.textContent = "WUHUU!! Du gjettet rett!! Tallet er " + rettTall + "!";
+                resultatElement.classList.remove("loss");
+                resultatElement.classList.add("win");
+                gifBilde.style.display = "block";
+                document.querySelector("button").disabled = true;
+            }
+        }
+    </script>
+</body>
+</html>
